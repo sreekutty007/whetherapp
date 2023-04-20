@@ -7,6 +7,7 @@ abstract class Routes {
   static const splash = _Paths.splash;
   static const login = _Paths.login;
   static const userForm = _Paths.userForm;
+  static const whetherMap = _Paths.whetherMap;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const splash = '/splash';
   static const login = '/login';
   static const userForm = '/user-form';
+  static const whetherMap = '/whether-map';
 }

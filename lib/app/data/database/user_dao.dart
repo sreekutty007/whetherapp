@@ -22,16 +22,9 @@ class UserDAO {
     return [];
   }
 
-  static Future<void> saveToDB(String id,
-      String firstName, String lastName, String email) async {
-    var sync = UserDBModel.random(
-      id,
-      firstName,
-      lastName,
-      email,
-      "false",
-      "0"
-    );
+  static Future<void> saveToDB(
+      String id, String firstName, String lastName, String email) async {
+    var sync = UserDBModel.random(id, firstName, lastName, email, "false", "0");
     await addDb(sync);
   }
 
@@ -44,11 +37,21 @@ class UserDAO {
     return client.delete('user', where: 'id  = ?', whereArgs: [id]);
   }
 
-  static Future<int> updateActive(String id,String active) async {
+  static Future<int> updateActive(String id, String active) async {
     var client = await UserDatabase.db;
     return client.rawUpdate(
-        '''UPDATE user SET active = ? WHERE  id = ?''',
-        [active, id]);
+        '''UPDATE user SET active = ? WHERE  id = ?''', [active, id]);
   }
 
+  static Future<int> updateWhether(String whether) async {
+    var client = await UserDatabase.db;
+    return client.rawUpdate(
+        '''UPDATE user SET whether = ? WHERE  active = ?''', [whether, "true"]);
+  }
+
+  static Future<int> updateWhetherById(String whether, String id) async {
+    var client = await UserDatabase.db;
+    return client.rawUpdate(
+        '''UPDATE user SET whether = ? WHERE  id = ?''', [whether, id]);
+  }
 }

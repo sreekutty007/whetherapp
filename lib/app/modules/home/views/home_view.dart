@@ -69,38 +69,51 @@ class HomeView extends GetView<HomeController> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white60,
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(width: 1, color: Colors.black12)),
-                  width: Get.width,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${controller.userList[index].firstName} ${controller.userList[index].lastName}",
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.whetherMap);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white60,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 1, color: Colors.black12)),
+                    width: Get.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${controller.userList[index].firstName} ${controller.userList[index].lastName}",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "${controller.userList[index].email}",
-                              style: const TextStyle(
-                                fontSize: 18,
+                              Text(
+                                "${controller.userList[index].email}",
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        toggleButton(index),
-                      ],
+                              controller.userList[index].active == "true"
+                                  ? Text(
+                                      "Current whether: ${controller.userList[index].whether}\u2103",
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    )
+                                  : Container(),
+                            ],
+                          ),
+                          toggleButton(index),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -113,22 +126,20 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget toggleButton(int index) {
-    return Obx(
-       () {
-        return Switch(
-          value: controller.userList[index].active == 'true' ? true : false,
-          onChanged: (bool value) {
-            print(value);
-            controller.updateActive(
-              controller.userList[index].id.toString(),
-              value.toString(),
-            );
-          },
-          activeColor: Colors.purple,
-          inactiveTrackColor: Colors.grey,
-          inactiveThumbColor: Colors.grey,
-        );
-      }
-    );
+    return Obx(() {
+      return Switch(
+        value: controller.userList[index].active == 'true' ? true : false,
+        onChanged: (bool value) {
+          print(value);
+          controller.updateActive(
+            controller.userList[index].id.toString(),
+            value.toString(),
+          );
+        },
+        activeColor: Colors.purple,
+        inactiveTrackColor: Colors.grey,
+        inactiveThumbColor: Colors.grey,
+      );
+    });
   }
 }

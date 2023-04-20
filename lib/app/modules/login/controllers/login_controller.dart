@@ -18,7 +18,7 @@ class LoginController extends GetxController {
         passwordFieldController.text != "Test@123456") {
       errorSnackBar('Incorrect Username or password');
     } else {
-      Get.toNamed(Routes.home);
+      Get.offAllNamed(Routes.home);
       data.write("isLogin", true);
     }
   }
@@ -30,6 +30,5 @@ class LoginController extends GetxController {
       backgroundColor: Colors.purple,
       colorText: Colors.white,
     );
-    
   }
 }

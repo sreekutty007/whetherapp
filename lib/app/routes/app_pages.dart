@@ -8,6 +8,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/user_form/bindings/user_form_binding.dart';
 import '../modules/user_form/views/user_form_view.dart';
+import '../modules/whether_map/bindings/whether_map_binding.dart';
+import '../modules/whether_map/views/whether_map_view.dart';
 
 part 'app_routes.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.userForm,
       page: () => const UserFormView(),
       binding: UserFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.whetherMap,
+      page: () => const WhetherMapView(),
+      binding: WhetherMapBinding(),
     ),
   ];
 }

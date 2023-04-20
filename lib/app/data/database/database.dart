@@ -51,7 +51,7 @@ class UserDatabase {
 
   Future<void> removeAll() async {
     var client = await db;
-    client.rawDelete("DELETE FROM item");
+    client.rawDelete("DELETE FROM user");
   }
 
   Future<void> remove(String table) async {

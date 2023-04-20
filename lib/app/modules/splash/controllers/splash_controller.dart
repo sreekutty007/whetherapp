@@ -11,10 +11,10 @@ class SplashController extends GetxController {
   navigation() {
     bool isLogin = data.read("isLogin") ?? false;
 
-    if(isLogin) {
-      Get.toNamed(Routes.home);
+    if (isLogin) {
+      Get.offAllNamed(Routes.home);
     } else {
-      Get.toNamed(Routes.login);
+      Get.offAllNamed(Routes.login);
     }
   }
 }

@@ -6,12 +6,14 @@ import 'package:whetherapp/app/data/models/whether_model.dart';
 
 class HomeController extends GetxController {
   var userList = <UserDBModel>[].obs;
+  var whether = Whether().obs;
+  var currentWhether = 0.0.obs;
 
   @override
   void onInit() {
     super.onInit();
-    callData();
     callApi();
+    callData();
   }
 
   callData() async {
@@ -25,11 +27,16 @@ class HomeController extends GetxController {
   }
 
   updateActive(String id, String active) async {
+    callApi();
     await UserDAO.updateActive(id, active);
+    await UserDAO.updateWhetherById(currentWhether.value.toString(), id);
     await callData();
   }
 
   callApi() async {
     var response = await ApiCalls().getWhether();
+    whether.value = response;
+    await UserDAO.updateWhether(whether.value.current!.tempC.toString());
+    currentWhether.value = whether.value.current!.tempC!;
   }
 }
